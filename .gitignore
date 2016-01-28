@@ -1,0 +1,7 @@
+out
+node_modules
+.svn
+test/trunk/.svn
+test/trunk/
+typings/
+vsc-extension-quickstart.md
