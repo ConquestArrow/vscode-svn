@@ -31,6 +31,7 @@
     "vscode": "0.10.x"
   },
   "dependencies": {
+    "diff": "^2.2.1",
     "diff-parse": "0.0.13",
     "which": "^1.2.1"
   },
