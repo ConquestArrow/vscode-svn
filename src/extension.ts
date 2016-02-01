@@ -6,6 +6,7 @@ import * as vscode from 'vscode';
 import {Wizard} from "./wizard"
 import * as ui from "./ui"
 import {GutterSvn} from "./gutter"
+import {StatusBar} from "./statusbar"
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -22,6 +23,7 @@ export function activate(context: vscode.ExtensionContext) {
 				//activate gutter indicator
 				//return new GutterSvn(context);
 				//res(new GutterSvn(context))
+				new StatusBar(context);
 				return new GutterSvn(context)
 			}//,
 			/*

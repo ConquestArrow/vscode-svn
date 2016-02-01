@@ -33,7 +33,8 @@
   "dependencies": {
     "diff": "^2.2.1",
     "diff-parse": "0.0.13",
-    "which": "^1.2.1"
+    "which": "^1.2.1",
+    "xml2js": "^0.4.16"
   },
   "private": true
 }

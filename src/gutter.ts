@@ -195,7 +195,6 @@ export class GutterSvn {
 	updateDecorations(){
 		const time = (<any>console).time;
 		const timeEnd = (<any>console).timeEnd;
-		
 		time("new_marked_total");
 		
 		time("compare");
@@ -267,7 +266,7 @@ export class GutterSvn {
 				}
 			)
 		} catch (e) {
-			console.log(`svn cat error ${e}`)
+			console.log(e)
 			out = ae.document.getText();
 		}
 		
@@ -280,12 +279,7 @@ export class GutterSvn {
 		head:string = this.headText,
 		current:string = ae.document.getText()
 	):IParsedDiff{
-		//const s = 
-		// JsDiff.diffLines(head, current, {newlineIsToken: true});
-		//console.log(s);
 		const s = JsDiff.createPatch("difffile", head, current, "old","new");
-		//JsDiff.parsePatch(diffStr)
-		//JSON.stringify
 		return diffParse(s)[0];
 	}
 	
@@ -322,10 +316,6 @@ export class GutterSvn {
 					Promise.reject(e);
 				}
 			})
-		
-		//console.log(lns)
-		
-		
 		return lns.filter(v=> !!v);
 	}
 	
@@ -381,7 +371,7 @@ export class GutterSvn {
 				col = "transparent"
 				leftWidth = 0
 				wholeLine = false;
-				bg = `${bg}; background:transparent url("${this.triBottom}") top left no-repeat !important`
+				bg = `${bg}; background:transparent url("${this.triBottom}") 0 0 no-repeat border-box !important`
 				break;
 		}
 		
