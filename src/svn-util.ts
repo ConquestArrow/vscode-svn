@@ -18,7 +18,7 @@ export interface SvnSt{
 										$:{
 											revision: string
 										},
-										author:string[],
+										author:string,
 										date:string[]
 									}
 								],
@@ -70,7 +70,15 @@ export function getStatusIcon(str:string){
 	return icon;
 }
 
-export function parseStatus(data:SvnSt):{item:string,revision:string}{
+export interface StatusData{
+	item:string,
+	revision:string,
+	isWC:boolean,
+	lastCommit?:string,
+	author?:string
+}
+
+export function parseStatus(data:SvnSt):StatusData{
 	const target = data
 		.status
 		.target[0];
@@ -81,17 +89,25 @@ export function parseStatus(data:SvnSt):{item:string,revision:string}{
 		//not working copy
 		return {
 			item: "no-WC",
-			revision: ""
+			revision: "",
+			isWC:false
 		}
 	}else{
 		return target.entry[0]["wc-status"]
 		.map(v=>{
 			return {
 				item:!!v.lock ? "locked" : v.$.item,
-				revision: !!v.$.revision ? v.$.revision : ""
+				revision: !!v.$.revision ? v.$.revision : "",
+				isWC:true,
+				lastCommit: hasLastCommitData(v) ? v.commit[0].$.revision : "",
+				author: hasLastCommitData(v) ? v.commit[0].author : ""
 			}
 		})[0];
 	}
+}
+
+function hasLastCommitData(v:{commit:[{$:{revision:string}}]}):boolean{
+	return !!v.commit && !!v.commit[0] && !!v.commit[0].$ && !!v.commit[0].$.revision;
 }
 
 /*

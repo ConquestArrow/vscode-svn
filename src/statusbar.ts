@@ -70,7 +70,7 @@ export class StatusBar{
 		let out:string|Buffer;
 		try {
 			out = child.execSync(
-				`svn st "${fileName}" --xml`,
+				`svn st "${fileName}" --verbose --xml`,
 				{
 					cwd: ws.rootPath,
 					maxBuffer: 10000000
@@ -93,18 +93,39 @@ export class StatusBar{
 				10000
 			);
 		}
-		this.svnItem.hide();
+		//this.svnItem.hide();
 		
 		this.xmlParsePromise(info, {})
 			.then(result =>{
 				let s = svn.parseStatus(<svn.SvnSt>result)
-				this.svnItem.text = "SVN:" + svn.getStatusIcon(s.item);
-				this.svnItem.show();
+				if(s.isWC){
+					this.svnItem.text = "SVN:" + svn.getStatusIcon(s.item);
+					this.svnItem.tooltip = this.toolTipText(s);
+					this.svnItem.show();
+				}else{
+					this.svnItem.hide();
+				}
+				
 			})
 			.catch(reject =>{
 				ui.error(reject);
 			})
 		
+	}
+	
+	private toolTipText(st:svn.StatusData):string{
+		let s = "";
+		
+		s += st.item;
+		if(!!st.lastCommit){
+			s += `, r${st.lastCommit}`;
+		}
+		if(!!st.author){
+			s += ` by ${st.author}`;
+		}
+		
+		
+		return s;
 	}
 	
 	private xmlParsePromise(xmlStr: string, opt?: xml.Options) {
