@@ -1,13 +1,35 @@
-# README
-## This is the README for your extension "svn" 
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
+# VSCode Subversion (SVN) integrating extension
 
-* Split the editor (`Cmd+\` on OSX or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on OSX or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (OSX) to see a list of Markdown snippets
+**This extension is currently WORK IN PROGRESS.**
 
-### For more information
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
 
-** Enjoy!**
+## Features
+
+### 1. Gutter indicator 
+
+VSCode-svn supports a gutter diff indicator. It's like a default git one.
+
+
+### 2. Status bar infomation
+
+VSCode-svn shows "`svn st`" infomations of a opened file.
+
+|Icon|Status|
+|:--:|:-----|
+|✔|normal |
+|💥|conflicted |
+|❔|unversioned|
+|⚠|modified|
+|❗|missing|
+|✚|added|
+|🔒|locked|
+|♻|replaced|
+|❌|deleted|
+|🚫|ignored|
+
+Tooltip shows status text, last commited revision, and commit author of a opened file.
+
+## TODO
+
+1. svn command integration
+2. command to show svn status lists
