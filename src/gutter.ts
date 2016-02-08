@@ -67,7 +67,7 @@ export class GutterSvn {
 		
 		this.initProps();
 		
-		if (!!ae) {
+		if (!!ae && !/^\/[1-3]$/.test(ae.document.fileName)) {
 			this.updateDecorations();
 		}
 		
@@ -78,7 +78,9 @@ export class GutterSvn {
 		ae = w.activeTextEditor;
 		
 		this.triBottom = this.context.asAbsolutePath(`img/tri_bottom.png`);
-		this.headText = this.getSvnHead();
+		if(!!ae && !/^\/[1-3]$/.test(ae.document.fileName)){
+			this.headText = this.getSvnHead();
+		}
 		
 		this.decoType[DecoType.MODIFIED] = this.createDecoTypes(DecoType.MODIFIED);
 		this.decoType[DecoType.ADDED] = this.createDecoTypes(DecoType.ADDED);
@@ -115,7 +117,7 @@ export class GutterSvn {
 	private changeEditorFocusEvent<T extends VSCodeChangeEvent>(e:T){
 		console.log(`changeEditorEvent called`)
 		ae = w.activeTextEditor;
-		if (!!ae) {
+		if (!!ae && !/^\/[1-3]$/.test(ae.document.fileName)) {
 			console.log(`c target is ${e.document.lineCount}`);
 			//this.triggerUpdateDecorations(this.context);
 			this.headText = this.getSvnHead();
@@ -126,7 +128,7 @@ export class GutterSvn {
 
 	private changeEvent<T extends VSCodeChangeEvent>(e: T) {
 		console.log(`changeEvent called`)
-		if (!!ae && e.document === ae.document) {
+		if (!!ae && e.document === ae.document && !/^\/[1-3]$/.test(ae.document.fileName)) {
 			console.log(`c target is ${e.document.lineCount}`);
 			//this.triggerUpdateDecorations(this.context);
 			
@@ -136,7 +138,7 @@ export class GutterSvn {
 
 	private fileEvent<T extends vscode.TextDocument>(e: T) {
 		console.log(`fileEvent called`)
-		if (!!ae && e === ae.document) {
+		if (!!ae && e === ae.document && !/^\/[1-3]$/.test(ae.document.fileName)) {
 			this.headText = this.getSvnHead();
 			console.log(`f target is ${e.lineCount}`)
 			//this.triggerUpdateDecorations(this.context);

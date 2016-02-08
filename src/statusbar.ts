@@ -24,7 +24,9 @@ export class StatusBar{
 		
 		
 		ae = w.activeTextEditor;
-		this.getSvnInfo(ae.document.fileName);
+		if(!!ae && !/^\/[1-3]$/.test(ae.document.fileName)){
+			this.getSvnInfo(ae.document.fileName);
+		}
 		this.initEvents();
 	}
 	
@@ -54,15 +56,21 @@ export class StatusBar{
 	}
 	
 	private changeEditorFocusEvent<T extends VSCodeChangeEvent>(e:T){
-		this.getSvnInfo(e.document.fileName);
+		if(!/^\/[1-3]$/.test(e.document.fileName)){
+			this.getSvnInfo(e.document.fileName);
+		}
 	}
 	
 	private changeEvent<T extends VSCodeChangeEvent>(e:T){
-		this.getSvnInfo(e.document.fileName);
+		if(!/^\/[1-3]$/.test(e.document.fileName)){
+			this.getSvnInfo(e.document.fileName);
+		}
 	}
 	
 	private fileEvent<T extends vscode.TextDocument>(e:T){
-		this.getSvnInfo(e.fileName);
+		if(!/^\/[1-3]$/.test(e.fileName)){
+			this.getSvnInfo(e.fileName);
+		}
 	}
 	
 	getSvnInfo(fileName:string){
