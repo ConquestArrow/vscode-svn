@@ -1,6 +1,6 @@
 {
-  "name": "svn",
-  "displayName": "svn",
+  "name": "vscode-svn",
+  "displayName": "vscode-svn",
   "description": "VSCode Subversion(svn) integration",
   "version": "0.1.0",
   "publisher": "ConquestArrow",
@@ -17,9 +17,9 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.svn.status",
-        "title": "svn status"
-      }
+        "command": "extension.svn",
+        "title": "svn cmd"
+	  }
     ]
   },
   "scripts": {
