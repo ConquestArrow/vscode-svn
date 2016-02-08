@@ -9,6 +9,8 @@
 
 VSCode-svn supports a gutter diff indicator. It's like a default git one.
 
+![gutter_sample](./doc/gutter_sample.png)
+
 
 ### 2. Status bar infomation
 
