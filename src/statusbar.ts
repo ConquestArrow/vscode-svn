@@ -23,7 +23,7 @@ export class StatusBar{
 	){
 		
 		
-		
+		ae = w.activeTextEditor;
 		this.getSvnInfo(ae.document.fileName);
 		this.initEvents();
 	}

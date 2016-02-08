@@ -3,5 +3,7 @@ node_modules
 .svn
 test/trunk/.svn
 test/trunk/
-typings/
+typings/diff
+typings/which
+typings/xml2js
 vsc-extension-quickstart.md

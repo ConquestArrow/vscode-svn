@@ -20,17 +20,14 @@ export function activate(context: vscode.ExtensionContext) {
 			res => {
 				console.log("wizard finished.",res)
 				//TODO:register commands
-				//activate gutter indicator
-				//return new GutterSvn(context);
-				//res(new GutterSvn(context))
-				new StatusBar(context);
-				return new GutterSvn(context)
-			}//,
-			/*
-			rej => {
-				console.log("wizard rejected.")
-				ui.error(rej)
-			}*/
+				try{
+					new StatusBar(context);
+					new GutterSvn(context);
+				}catch(e){
+					console.error(e);
+					return Promise.reject(e)
+				}
+			}
 		)
 		.then(
 			null ,
