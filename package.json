@@ -19,16 +19,19 @@
       {
         "command": "extension.svn",
         "title": "svn cmd"
-	  }
+      }
     ]
   },
   "scripts": {
     "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
-    "compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
+    "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "devDependencies": {
+    "typedoc": "^0.3.12",
     "typescript": "^1.6.2",
-    "vscode": "0.10.x"
+    "vsce": "^1.1.0",
+    "vscode": "0.11.x"
   },
   "dependencies": {
     "diff": "^2.2.1",
