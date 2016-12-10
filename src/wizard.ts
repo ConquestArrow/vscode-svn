@@ -40,13 +40,13 @@ export class Wizard{
 				},e => ui.error(e))
 				.then(doc =>{
 					console.log(`preview md`)
-					if(doc.document !== w.activeTextEditor.document){
+					if((<vscode.TextEditor>doc).document !== w.activeTextEditor.document){
 						
 						console.log("not active document")
 						
-						w.activeTextEditor.document = doc.document;
+						w.activeTextEditor.document = (<vscode.TextEditor>doc).document;
 					}
-					return vscode.commands.executeCommand('workbench.action.markdown.togglePreview');
+					return vscode.commands.executeCommand('markdown.showPreview');
 				},e => ui.error(e))
 				.then(
 					res => {
