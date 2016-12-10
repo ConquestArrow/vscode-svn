@@ -7,7 +7,7 @@ import * as ui from "./ui";
  */
 export function getCmdPromise(command:string, opt:ProcessChildOption = {}) {
 	console.log(`cmd: ${command}`)
-	return new Promise<Buffer>((resolve, reject) => {
+	return new Promise<string>((resolve, reject) => {
 		child.exec(
 			command,
 			opt,
