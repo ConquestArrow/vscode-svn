@@ -281,6 +281,7 @@ export class GutterSvn {
 		let leftWidth: number = 2;
 		let wholeLine: boolean = true;
 		let bg: string = "transparent";
+		let isDeletedLine:boolean = false;
 		
 		switch(decoType){
 			case DecoType.MODIFIED:
@@ -293,7 +294,8 @@ export class GutterSvn {
 				col = "transparent"
 				leftWidth = 0
 				wholeLine = false;
-				bg = `${bg}; background:transparent url("${this.triBottom}") 0 0 no-repeat border-box !important`
+				bg = `${bg}`
+				isDeletedLine = true;
 				break;
 		}
 		
@@ -306,7 +308,11 @@ export class GutterSvn {
 				borderStyle: "solid",
 				borderColor: col,
 				backgroundColor: `${bg}`,
+			},
+			before:{
+				contentIconPath: isDeletedLine ? `${this.triBottom}` : null,				width:"0px",
 			}
+
 		}
 		
 		return w.createTextEditorDecorationType(deco);
