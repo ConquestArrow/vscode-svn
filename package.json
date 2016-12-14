@@ -38,11 +38,12 @@
     "@types/xml2js": "^0.0.28",
     "@types/diff": "^0.0.31"
   },
-  "dependencies": { 
+  "dependencies": {
     "diff": "^2.2.1",
     "diff-parse": "0.0.13",
+    "vscode": "^1.0.3",
     "which": "^1.2.1",
-    "xml2js": "^0.4.17"  
+    "xml2js": "^0.4.17"
   },
   "private": true
 }
