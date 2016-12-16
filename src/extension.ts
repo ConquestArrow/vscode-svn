@@ -27,8 +27,8 @@ export function activate(context: vscode.ExtensionContext) {
 				let svnCmd = vscode
 					.commands
 					.registerCommand(
-					"extension.svn",
-					mainSvnCmd
+						"extension.svn",
+						mainSvnCmd
 					);
 				context
 					.subscriptions
@@ -42,8 +42,8 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 		)
 		.then(
-		null,
-		e => ui.error(e)
+			null,
+			e => ui.error(e)
 		)
 }
 
