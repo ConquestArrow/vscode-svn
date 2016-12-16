@@ -2,7 +2,7 @@
   "name": "vscode-svn",
   "displayName": "vscode-svn",
   "description": "VSCode Subversion(svn) integration",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "ConquestArrow",
   "engines": {
     "vscode": "^1.0.0"
