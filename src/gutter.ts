@@ -20,23 +20,16 @@ type MarkedLine = { add: boolean, del: boolean, contentLength?: number }[];
 
 type ClassifiedLine = {
 	decoType:DecoType;
-	value:string;
+	value?:string;
 	lineNumber:number;
 }
 
-interface IParsedDiff{
-	lines: DiffLine[];
-}
-interface DiffLine{
-	type: string,
-	ln: number, 
-	content: string 
-}
+
 interface TempLine{
 	ln:number,
 	added?:boolean,
 	removed?:boolean,
-	content:string
+	content?:string
 }
 
 enum DecoType{
@@ -48,6 +41,8 @@ enum DecoType{
 interface IDiffResult extends JsDiff.IDiffResult{
 	count:number;
 }
+
+
 
 
 export class GutterSvn {
@@ -200,43 +195,46 @@ export class GutterSvn {
 	compareText(
 		head:string = this.headText,
 		current:string = ae.document.getText()
-	):IParsedDiff{
-		const s = JsDiff.createPatch("difffile", head, current, "old","new");
-		return diffParse(s)[0];
+	):JsDiff.IDiffResult[]{
+		const s = JsDiff.diffLines(head, current)
+		return s;
 	}
+
 	
-	createTempLines(parsedDiff:IParsedDiff){
-		let lns:{ln:number,added?:boolean,removed?:boolean,content:string}[] = [];
-		
-		parsedDiff.lines
-			.filter(v => v.type === "add" || v.type === "del")
-			.forEach(v =>{
-				
-				let isAdded:boolean;
-				let isRemoved:boolean;
-				
-				switch(v.type){
-					case "add":
-						isAdded = true;
-						break;
-					case "del":
-						isRemoved = true;
-						break;
-				}
-				try{
-					let t = lns[v.ln];
-					
+	
+	createTempLines(parsedDiff:JsDiff.IDiffResult[]){
+
+		let lns:{ln:number,added?:boolean,removed?:boolean,content?:string}[] = [];
+		let n = 0
+
+		parsedDiff
+			.forEach(v => {
+
+				let isAdded = v.added;
+				let isRemoved = v.removed;
+			
+				for(let i=1; i<=v.count; i++){
+					let cnt = n + i;
+					let t = lns[cnt];
+
 					if(!t) t = null;
-					lns[v.ln] = {
-						ln:v.ln,
+
+					lns[cnt] = {
+						ln:cnt,
 						added: !t || !t.added ? isAdded : t.added,
 						removed: !t || !t.removed ? isRemoved : t.removed,
-						content: v.content
 					}
-				}catch(e){
-					console.log(e);
-					Promise.reject(e);
+
 				}
+
+				if(isRemoved){
+
+					//do nothing more
+					return ;
+				}else{
+					n = n + v.count;
+				}
+
 			})
 		return lns.filter(v=> !!v);
 	}
