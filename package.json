@@ -39,7 +39,7 @@
     "@types/diff": "^0.0.31"
   },
   "dependencies": {
-    "diff": "^2.2.1",
+    "diff": "^3.1.0",
     "diff-parse": "0.0.13",
     "vscode": "^1.0.3",
     "which": "^1.2.1",
