@@ -3,9 +3,6 @@ import * as child from "child_process";
 import * as fs from "fs";
 import * as JsDiff from "diff";
 
-const diffParse = require("diff-parse")
-
-
 import * as event from "./event";
 import * as cmd from "./command";
 import * as ui from "./ui";
